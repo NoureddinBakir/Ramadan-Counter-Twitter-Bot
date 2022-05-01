@@ -1,0 +1,56 @@
+html, body {
+  width: 100%;
+  height:100%;
+  font-family: 'verdana';
+}
+
+body {
+    background: linear-gradient(-45deg, #4d22b3, #9a244f, #669c35, #f5ec00);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+ul.no-bullets {
+  list-style-type: none; /* Remove bullets */
+  display: table;
+  margin: 0 auto;
+  font-family: 'verdana';
+  line-height:200%;
+}
+
+a {
+  text-decoration: 'none';
+}
+
+span{
+  text-transform: uppercase;
+    font-family: verdana;
+    font-weight: 700;
+    color: #74a7fe;
+    text-shadow: 1px 1px 1px #FFFF,
+        1px 2px 1px #FFFF,
+        1px 3px 1px #FFFF,
+        1px 4px 1px #FFFF,
+        1px 5px 1px #FFFF,
+        1px 6px 1px #FFFF,
+        1px 7px 1px #FFFF,
+        1px 8px 1px #FFFF,
+        1px 9px 1px #FFFF,
+        1px 10px 1px #FFFF,
+    1px 18px 6px rgba(16,16,16,0.4),
+    1px 22px 10px rgba(16,16,16,0.2),
+    1px 25px 35px rgba(16,16,16,0.2),
+    1px 30px 60px rgba(16,16,16,0.4) !important;
+}

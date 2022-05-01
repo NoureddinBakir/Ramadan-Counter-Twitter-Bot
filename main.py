@@ -3,19 +3,8 @@ import tweepy
 from datetime import timedelta, datetime
 import Wallpaper
 import math
+from flask import Flask, render_template
 
-# from apscheduler.schedulers.blocking import BlockingScheduler
-
-# sched = BlockingScheduler()
-
-# @sched.scheduled_job('cron', day_of_week='mon-sun', hour=8)
-# def scheduled_job():
-#     print('This job is run every weekday at 8am.')
-
-# sched.start()
-
-# os.getenv('/.env')
-# os holds all the keys
 access_token = os.environ['access_token']
 access_token_secret = os.environ['access_token_secret']
 consumer_key = os.environ['consumer_key']
@@ -24,7 +13,6 @@ consumer_secret = os.environ['consumer_secret']
 # Place keys for api access
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
-
 api = tweepy.API(auth)
 
 d0 = datetime.now()
@@ -46,14 +34,36 @@ lastPercent = f.read(2)
 f.close()
 print(lastPercent)
 
-if(percent > int(lastPercent)):
-  f = open("lastTime.txt", "w")
-  f.write(str(percent))
-  f.close()
-  try:
-    Wallpaper.get_wallpaper(quote, round(percent))
-    media = api.media_upload("created_image.png")
-    api.update_status(count, media_ids=[media.media_id])
-    print(count)
-  except:
-    print('Try again G')
+def tweet():
+  if(percent > int(lastPercent)):
+    f = open("lastTime.txt", "w")
+    f.write(str(percent))
+    f.close()
+    try:
+      Wallpaper.get_wallpaper(quote, round(percent))
+      media = api.media_upload("created_image.png")
+      api.update_status(count, media_ids=[media.media_id])
+      print(count)
+    except:
+      print('Try again G')
+
+# tweet()
+
+app = Flask(  # Create a flask app
+	__name__,
+	template_folder='templates'
+)
+
+@app.route('/')  # What happens when the user visits the site
+def index():
+	return render_template(
+		'index.html',  # Template file path, starting from the templates folder
+    username='Michael',
+    days = delta.days
+	)
+
+if __name__ == "__main__":  # Makes sure this is the main process
+  app.run(
+    host='0.0.0.0',  # EStablishes the host, required for repl to detect the site
+    port= 8000 
+  )
